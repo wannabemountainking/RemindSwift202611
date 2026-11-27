@@ -9,11 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
 	@State private var cartItems: [CartItem] = [
-		CartItem(name: "사과", quantity: 2),
-		CartItem(name: "우유", quantity: 0),
-		CartItem(name: "식빵", quantity: 5)
+		CartItem(name: "사과", quantity: 2, price: 1500),
+		CartItem(name: "우유", quantity: 0, price: 2500),
+		CartItem(name: "식빵", quantity: 5, price: 3000)
 	]
-	@State private var currentItem: CartItem?
 	
     var body: some View {
 		ZStack {
@@ -27,7 +26,9 @@ struct ContentView: View {
 				}
 				Spacer()
 				VStack(alignment: .leading, spacing: 30) {
-					
+					ForEach($cartItems) { item in
+						ItemView(item: item)
+					}
 				}
 				Spacer()
 				VStack(alignment: .leading, spacing: 30) {
@@ -42,11 +43,25 @@ struct ContentView: View {
     }
 }
 
-struct ListView {
-	@Binding var cartItem: CartItem?
+struct ItemView: View {
+	@Binding var item: CartItem
 	
-	var
-	
+	var body: some View {
+		HStack {
+			Text(item.name)
+			Text("  (\(item.price.formatted())원)")
+			Spacer()
+			HStack(spacing: 20) {
+				Button("➖") {
+					
+				}
+				Text("\(item.quantity)")
+				Button("➕") {
+					
+				}
+			}
+		}
+	}
 }
 
 #Preview {

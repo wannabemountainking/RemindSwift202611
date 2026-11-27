@@ -7,7 +7,9 @@
 
 import Foundation
 
-struct CartItem {
+struct CartItem: Identifiable {
+	let id = UUID()
 	let name: String
 	var quantity: Int
+	var price: Int
 }
