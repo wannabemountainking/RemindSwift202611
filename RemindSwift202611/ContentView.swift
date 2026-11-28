@@ -10,11 +10,7 @@ import SwiftUI
 struct ContentView: View {
 	
     var body: some View {
-		CartItemsView(cartVM: CartItemsViewModel()) {
-			
-		} isSubtracted: {
-			
-		}
+		CartItemsView()
 
     }
 }

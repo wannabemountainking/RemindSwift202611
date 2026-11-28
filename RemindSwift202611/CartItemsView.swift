@@ -10,20 +10,23 @@ import SwiftUI
 struct CartItemsView: View {
 	
 	@State var cartVM: CartItemsViewModel = .init()
-	let isAdded: () -> Void
-	let isSubtracted: () -> Void
+	var isAdded: (() -> Void)?
+	var isSubtracted: (() -> Void)?
 	
 	var body: some View {
 		ZStack {
 			Color.green.opacity(0.3).ignoresSafeArea()
 			
 			VStack(spacing: 50) {
+                
 				VStack(alignment: .center) {
 					Text("장바구니")
 						.font(.largeTitle)
 						.fontWeight(.heavy)
 				}
+                
 				Divider()
+                
 				VStack(alignment: .leading, spacing: 30) {
                     ForEach($cartVM.cartItems) { item in
 						ItemView(
@@ -35,15 +38,23 @@ struct CartItemsView: View {
 								cartVM.quantityChangeInCart(operation: .subtract)
 							}
 						)
+                        .onTapGesture {
+                            
+                        }
+
 					}
 				}
+                
 				Divider()
+                
 				HStack {
 					HStack(spacing: 20) {
 						Text("선택 : ")
 						Text("\(cartVM.currentItem?.name ?? "없음")")
 					}
+                    
 					Spacer()
+                    
 					Button("선택 해제") {
 						cartVM.currentItem = nil
 					}
@@ -66,7 +77,7 @@ struct CartItemsView: View {
 }
 
 struct ItemView: View {
-	@Binding var item: CartItem
+	var item: CartItem
 	let isAdding: (CartItem) -> Void
 	let isSubtracting: (CartItem) -> Void
 	
