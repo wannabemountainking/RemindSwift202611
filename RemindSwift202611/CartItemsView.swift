@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CartItemsView: View {
 	
-	var cartVM: CartItemsViewModel = .init()
+	@State var cartVM: CartItemsViewModel = .init()
 
 	var body: some View {
 		ZStack {
@@ -23,7 +23,7 @@ struct CartItemsView: View {
 				}
 				Spacer()
 				VStack(alignment: .leading, spacing: 30) {
-					ForEach($cartVM.) { item in
+                    ForEach($cartVM.cartItems) { item in
 						ItemView(item: item)
 					}
 				}
@@ -33,9 +33,8 @@ struct CartItemsView: View {
 						
 					}
 				}
-				
 			}
-			.padding()
+            .padding(.horizontal, 40)
 		}
 	}
 }
@@ -58,6 +57,8 @@ struct ItemView: View {
 				}
 			}
 		}
+        .font(.title3)
+        .fontWeight(.semibold)
 	}
 }
 
