@@ -7,9 +7,20 @@
 
 import Foundation
 
+
+enum BasicOperation {
+	case add
+	case subtract
+}
+
 struct CartItem: Identifiable {
 	let id = UUID()
 	let name: String
-	var quantity: Int
-	var price: Int
+	var quantity: Decimal
+	var unitPrice: Decimal
+	
+	var subtotal: Decimal {
+		return unitPrice * quantity
+	}
 }
+
